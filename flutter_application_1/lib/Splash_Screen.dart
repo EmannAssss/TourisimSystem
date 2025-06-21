@@ -8,7 +8,7 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     // الانتقال التلقائي بعد 3 ثواني
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      Future.delayed(const Duration(seconds: 3  ), () {
+      Future.delayed(const Duration(seconds: 5  ), () {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => const OnboardingScreen()),
@@ -21,10 +21,10 @@ class SplashScreen extends StatelessWidget {
       body: Center(
         child: ClipOval(
           child: Image.asset(
-            'assets/tripella.png', // تأكد من أن الصورة لديك موجودة هنا
+            'assets/Tripella.png',
             width: 280,
             height: 280,
-            fit: BoxFit.cover, // لضمان ملء الصورة داخل الدائرة
+            fit: BoxFit.cover, 
           ),
         ),
       ),

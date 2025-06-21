@@ -38,7 +38,7 @@ class _SignupScreenState extends State<SignupScreen> {
   void _submitForm() {
     if (_formKey.currentState!.validate()) {
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const HomePage()),
+        MaterialPageRoute(builder: (context) => const HomeScreen ()),
       );
     }
   }
