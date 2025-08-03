@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'flight_selection_page.dart';
 
 class TripDetailsPage extends StatelessWidget {
   final String title;
   final String imageUrl;
   final String description;
   final List<String> tripPlan;
-  final VoidCallback onBookTrip;
+  final VoidCallback? onBookTrip;
 
   const TripDetailsPage({
     super.key,
@@ -13,8 +14,25 @@ class TripDetailsPage extends StatelessWidget {
     required this.imageUrl,
     required this.description,
     required this.tripPlan,
-    required this.onBookTrip,
+    this.onBookTrip,
   });
+
+  String _getDestinationCode(String destination) {
+    switch (destination.toLowerCase()) {
+      case 'paris': return 'CDG';
+      case 'rome': return 'FCO';
+      case 'tokyo': return 'HND';
+      case 'dubai': return 'DXB';
+      case 'amazon': return 'MAO';
+      case 'himalayas': return 'KTM';
+      case 'sahara': return 'TGR';
+      case 'african forests': return 'NBO';
+      case 'turkey offer': return 'IST';
+      case 'thailand offer': return 'BKK';
+      case 'morocco offer': return 'CMN';
+      default: return 'MAI';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,25 +60,37 @@ class TripDetailsPage extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             const Text(
-              'خطة الرحلة',
+              'Trip Plan',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            ...tripPlan.map((step) => ListTile(
-                  leading: const Icon(Icons.check_circle_outline, color: Colors.orange),
-                  title: Text(step),
-                )),
+            ...tripPlan.map(
+              (step) => ListTile(
+                leading: const Icon(Icons.check_circle_outline, color: Colors.orange),
+                title: Text(step),
+              ),
+            ),
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                onBookTrip();
-                Navigator.of(context).pop();
+                if (onBookTrip != null) {
+                  onBookTrip!();
+                }
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => FlightSelectionPage(
+                      title: title,
+                      destination: title,
+                      destinationCode: _getDestinationCode(title),
+                    ),
+                  ),
+                );
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.orange,
                 minimumSize: const Size(double.infinity, 50),
               ),
               child: const Text(
-                'احجز الآن',
+                'Book Now',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
             ),

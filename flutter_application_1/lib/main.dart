@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-
-
-import 'splash_screen.dart';
+import 'package:flutter_application_1/hotel_selection_page.dart';
+import 'package:flutter_application_1/Splash_Screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,6 +20,18 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Roboto',
       ),
       home: const SplashScreen(),
+      routes: {
+        '/hotelSelection': (context) => HotelSelectionPage(
+              selectedFlight: 'Qatar Airways',
+              flightPrice: 650,
+              destination: 'Bahrain',
+              airline: 'Qatar Airways',
+              departure: 'KWI - Kuwait',
+              arrival: 'BAH - Bahrain',
+              departureDate: '24 Sep. 08:30 AM',
+              arrivalDate: '24 Sep. 11:45 AM',
+            ),
+      },
     );
   }
 }
